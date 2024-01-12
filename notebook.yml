@@ -21,7 +21,7 @@ inputs:
     description: |
       The name of the app.
     type: str
-    default: gpfgan
+    default: gfpgan
   storage:
     description: |
       The storage absolute path.
