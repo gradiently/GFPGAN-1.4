@@ -14,3 +14,4 @@ RUN pip install facexlib
 
 RUN pip install -r requirements.txt
 RUN python setup.py develop
+RUN ln -s /home/jupyter /workspace/GFPGAN/storage
