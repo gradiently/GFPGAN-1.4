@@ -16,4 +16,4 @@ COPY . /workspace/GFPGAN
 WORKDIR /workspace/GFPGAN
 
 RUN python setup.py develop
-RUN ln -s /home/jupyter /workspace/GFPGAN/storage
+RUN ln -s /workspace/storage /workspace/GFPGAN/storage
