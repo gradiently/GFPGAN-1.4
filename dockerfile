@@ -1,5 +1,12 @@
 FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 
+RUN export DEBIAN_FRONTEND=noninteractive &&\
+    apt-get update && apt-get install -y git && \
+    apt-get install ffmpeg libsm6 libxext6  -y && \
+    apt-get install build-essential -y && \
+    apt-get install libgl1-mesa-glx -y && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install basicsr - https://github.com/xinntao/BasicSR
 # We use BasicSR for both training and inference
 RUN pip install basicsr
