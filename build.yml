@@ -1,0 +1,4 @@
+command: |
+  sudo docker build -t gfpgan -f dockerfile .
+description: |
+  Build the docker image for GFPGAN.

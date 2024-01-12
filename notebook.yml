@@ -1,0 +1,40 @@
+command: |
+  isrunning=$(sudo docker ps -a --filter name={app_name} --format "{{.Names}}")
+  if [ "$isrunning" == "{app_name}" ]; then
+    echo "🚀 jupyter is running, stop it first."
+    sudo docker stop {app_name}
+  fi;
+  echo "🐳 Starting {app_name}..."
+  sudo docker run \
+    --gpus all \
+    -p 8888:8888 \
+    -p 8088:8088 \
+    -v {storage}:/workspace/storage \
+    -d --rm --name {app_name} {app_name} \
+      jupyter notebook --port 8088 --ip "*" --no-browser --allow-root --NotebookApp.token={jupyter_secret};
+  echo "🎬 container running..., see http://location:8888"
+  sudo docker logs -f {app_name};
+description: |
+  Bash entering the docker container for jupyter
+inputs:
+  app_name:
+    description: |
+      The name of the app.
+    type: str
+    default: gpfgan
+  storage:
+    description: |
+      The storage absolute path.
+      It could be somewhere huge, like a mounted disk on a cloud, etc.
+    type: str
+    env_var: DOCKER_STORAGE
+  jupyter_secret:
+    description: |
+      The secret key for Jupyter Notebook.
+    type: secret
+    env_var: JUPYTER_SECRET
+  stage:
+    description: |
+      The stage of the app.
+    type: str
+    default: gcp
