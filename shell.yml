@@ -1,0 +1,4 @@
+command: sudo docker exec -it gfpgan bash
+description: |
+  Bash entering the docker container for GFPGAN.
+  Notice the entrypoint is in }:/workspace/GFPGAN
